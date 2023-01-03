@@ -1,9 +1,14 @@
 package com.udacity.project4.locationreminders.reminderslist
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import com.firebase.ui.auth.AuthUI
+import com.google.firebase.auth.FirebaseAuth
 import com.udacity.project4.R
+import com.udacity.project4.authentication.FirebaseUserLiveData
 import com.udacity.project4.base.BaseFragment
 import com.udacity.project4.base.NavigationCommand
 import com.udacity.project4.databinding.FragmentRemindersBinding
@@ -27,13 +32,30 @@ class ReminderListFragment : BaseFragment() {
             )
         binding.viewModel = _viewModel
 
+        _viewModel.authenticationState.observe(viewLifecycleOwner, Observer {
+            checkAuthentication(it)
+        })
+
         setHasOptionsMenu(true)
         setDisplayHomeAsUpEnabled(false)
-        setTitle(getString(R.string.app_name))
 
         binding.refreshLayout.setOnRefreshListener { _viewModel.loadReminders() }
 
         return binding.root
+    }
+
+    private fun checkAuthentication(it: RemindersListViewModel.AuthenticationState?) {
+        if (it == RemindersListViewModel.AuthenticationState.AUTHENTICATED) {
+            _viewModel.currentUser = FirebaseAuth.getInstance().currentUser
+            setTitle("Welcome : " + _viewModel.currentUser?.displayName)
+        } else {
+            Log.i("ReminderListFragment","Unauthenticated")
+            _viewModel.navigationCommand.postValue(
+                NavigationCommand.To(
+                    ReminderListFragmentDirections.actionReminderListFragmentToAuthenticationActivity()
+                )
+            )
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -71,7 +93,7 @@ class ReminderListFragment : BaseFragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.logout -> {
-//                TODO: add the logout implementation
+                AuthUI.getInstance().signOut(requireContext())
             }
         }
         return super.onOptionsItemSelected(item)
@@ -82,6 +104,8 @@ class ReminderListFragment : BaseFragment() {
         super.onCreateOptionsMenu(menu, inflater)
 //        display logout as menu item
         inflater.inflate(R.menu.main_menu, menu)
+        var logoutBtn = menu.findItem(R.id.logout)
+        logoutBtn.title = getString(R.string.logout)
     }
 
 }
