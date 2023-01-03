@@ -7,7 +7,7 @@ buildscript {
     repositories {
         google()
         jcenter()
-
+        mavenCentral()  // Maven Central repository
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:4.0.1'
@@ -24,6 +24,7 @@ allprojects {
     repositories {
         google()
         jcenter()
+        mavenCentral()  // Maven Central repository
     }
 }
 
@@ -33,7 +34,7 @@ task clean(type: Delete) {
 ext {
     // Sdk and tools
     // Support library and architecture components support minSdk 14 and above.
-    minSdkVersion = 16
+    minSdkVersion = 21
     targetSdkVersion = 30
     compileSdkVersion = 30
 
@@ -56,7 +57,7 @@ ext {
     truthVersion = '0.44'
     junitVersion = '4.12'
     androidXTestCoreVersion = '1.2.0-beta01'
-    robolectricVersion = '4.3-beta-1'
+    robolectricVersion = '4.5-alpha-3'
     androidXTestExtKotlinRunnerVersion = '1.1.1'
     archTestingVersion = '2.0.0'
     playServicesVersion = '17.0.0'
