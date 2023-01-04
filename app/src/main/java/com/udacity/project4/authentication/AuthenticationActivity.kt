@@ -11,7 +11,6 @@ import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
 import com.google.firebase.auth.FirebaseAuth
 import com.udacity.project4.R
-import com.udacity.project4.locationreminders.reminderslist.ReminderListFragment
 import kotlinx.android.synthetic.main.activity_reminders.*
 
 /**

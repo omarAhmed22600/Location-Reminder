@@ -6,7 +6,12 @@
         <entry key="..\:/Users/Omar/Desktop/nd940-android-kotlin-c4-starter-master/starter/app/src/main/res/layout/activity_authentication.xml" value="0.18385416666666668" />
         <entry key="..\:/Users/Omar/Desktop/nd940-android-kotlin-c4-starter-master/starter/app/src/main/res/layout/activity_reminder_description.xml" value="0.30185185185185187" />
         <entry key="..\:/Users/Omar/Desktop/nd940-android-kotlin-c4-starter-master/starter/app/src/main/res/layout/activity_reminders.xml" value="0.23072916666666668" />
+        <entry key="..\:/Users/Omar/Desktop/nd940-android-kotlin-c4-starter-master/starter/app/src/main/res/layout/fragment_reminders.xml" value="0.1925925925925926" />
+        <entry key="..\:/Users/Omar/Desktop/nd940-android-kotlin-c4-starter-master/starter/app/src/main/res/layout/fragment_save_reminder.xml" value="0.1925925925925926" />
         <entry key="..\:/Users/Omar/Desktop/nd940-android-kotlin-c4-starter-master/starter/app/src/main/res/layout/fragment_select_location.xml" value="0.25833333333333336" />
+        <entry key="..\:/Users/Omar/Desktop/nd940-android-kotlin-c4-starter-master/starter/app/src/main/res/layout/it_reminder.xml" value="0.1925925925925926" />
+        <entry key="..\:/Users/Omar/Desktop/nd940-android-kotlin-c4-starter-master/starter/app/src/main/res/menu/main_menu.xml" value="0.20208333333333334" />
+        <entry key="..\:/Users/Omar/Desktop/nd940-android-kotlin-c4-starter-master/starter/app/src/main/res/menu/map_options.xml" value="0.20208333333333334" />
       </map>
     </option>
   </component>
