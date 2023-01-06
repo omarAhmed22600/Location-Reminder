@@ -6,11 +6,15 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.fragment.NavHostFragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.map
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
 import com.google.firebase.auth.FirebaseAuth
 import com.udacity.project4.R
+import com.udacity.project4.locationreminders.RemindersActivity
+import com.udacity.project4.locationreminders.reminderslist.RemindersListViewModel
 import kotlinx.android.synthetic.main.activity_reminders.*
 
 /**
@@ -22,16 +26,46 @@ class AuthenticationActivity : AppCompatActivity() {
         const val TAG = "AuthenticationActivity"
         const val SIGN_IN_RESULT_CODE = 1001
     }
+    enum class AuthenticationState {
+        AUTHENTICATED, UNAUTHENTICATED
+    }
+    var currentUser = FirebaseAuth.getInstance().currentUser
+    private val authenticationState = if (currentUser != null)
+    {
+        AuthenticationState.AUTHENTICATED
+    }
+    else
+    {
+        AuthenticationState.UNAUTHENTICATED
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_authentication)
+
+        if (authenticationState == AuthenticationState.AUTHENTICATED && currentUser != null)
+        {
+            Log.i(TAG,"Already Authenticated")
+           navigateToReminderActivity()
+        }
+        else
+        {
+            Log.i(TAG,"Unauthenticated"+ currentUser?.displayName.toString() + authenticationState.toString())
+
+        }
         var btn = findViewById<Button>(R.id.loginin_or_registerButton)
         btn.setOnClickListener {
             launchSignInFlow()
         }
-// a bonus is to customize the sign in flow to look nice using :
+        // a bonus is to customize the sign in flow to look nice using :
         //https://github.com/firebase/FirebaseUI-Android/blob/master/auth/README.md#custom-layout
+    }
+    private fun navigateToReminderActivity()
+    {
+        var authIntent = Intent(this,RemindersActivity::class.java)
+        startActivity(authIntent)
+        this.finish()
     }
 
     private fun launchSignInFlow() {
@@ -52,6 +86,7 @@ class AuthenticationActivity : AppCompatActivity() {
         if (requestCode == SIGN_IN_RESULT_CODE) {
             val response = IdpResponse.fromResultIntent(data)
             if (resultCode == Activity.RESULT_OK) {
+                navigateToReminderActivity()
                 // User successfully signed in
                 Log.i(
                     TAG,

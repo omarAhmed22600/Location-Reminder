@@ -14,6 +14,7 @@ import com.udacity.project4.authentication.AuthenticationActivity
 import com.udacity.project4.base.BaseFragment
 import com.udacity.project4.base.NavigationCommand
 import com.udacity.project4.databinding.FragmentRemindersBinding
+import com.udacity.project4.locationreminders.RemindersActivity
 import com.udacity.project4.utils.setDisplayHomeAsUpEnabled
 import com.udacity.project4.utils.setTitle
 import com.udacity.project4.utils.setup
@@ -33,29 +34,24 @@ class ReminderListFragment : BaseFragment() {
                 R.layout.fragment_reminders, container, false
             )
         binding.viewModel = _viewModel
-
         _viewModel.authenticationState.observe(viewLifecycleOwner, Observer {
-            checkAuthentication(it)
+            if (it == RemindersListViewModel.AuthenticationState.UNAUTHENTICATED)
+            {
+                navigateToAuthenticationActivity()
+            }
         })
-
+        setTitle("Welcome: "+_viewModel.currentUser?.displayName.toString())
         setHasOptionsMenu(true)
         setDisplayHomeAsUpEnabled(false)
-
         binding.refreshLayout.setOnRefreshListener { _viewModel.loadReminders() }
-
         return binding.root
     }
 
-    private fun checkAuthentication(it: RemindersListViewModel.AuthenticationState?) {
-        if (it == RemindersListViewModel.AuthenticationState.AUTHENTICATED) {
-            _viewModel.currentUser = FirebaseAuth.getInstance().currentUser
-            setTitle("Welcome : " + _viewModel.currentUser?.displayName)
-        } else {
-            Log.i("ReminderListFragment","Unauthenticated")
-            var authIntent = Intent(requireActivity(),AuthenticationActivity::class.java)
-            startActivity(authIntent)
-        }
+    private fun navigateToAuthenticationActivity() {
+        var authIntent = Intent(requireActivity(),AuthenticationActivity::class.java)
+        startActivity(authIntent)
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
