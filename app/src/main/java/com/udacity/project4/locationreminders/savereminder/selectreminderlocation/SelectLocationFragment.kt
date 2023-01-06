@@ -33,12 +33,13 @@ class SelectLocationFragment : BaseFragment(), OnMapReadyCallback {
     companion object {
         private const val REQUEST_TURN_DEVICE_LOCATION_ON = 29
         private const val DEFAULT_ZOOM_LEVEL =15f
+        private const val REQUEST_LOCATION_PERMISSION = 1
+
     }
     //Use Koin to get the view model of the SaveReminder
     override val _viewModel: SaveReminderViewModel by inject()
     private lateinit var binding: FragmentSelectLocationBinding
     private lateinit var map: GoogleMap
-    private val REQUEST_LOCATION_PERMISSION = 1
     private var marker: Marker? = null
     private val TAG = SelectLocationFragment::class.java.simpleName
 
@@ -133,7 +134,7 @@ class SelectLocationFragment : BaseFragment(), OnMapReadyCallback {
             enableMyLocation()
         }
         else {
-            this.requestPermissions(
+            requestPermissions(
                 arrayOf<String>(Manifest.permission.ACCESS_FINE_LOCATION),
                 REQUEST_LOCATION_PERMISSION
             )
