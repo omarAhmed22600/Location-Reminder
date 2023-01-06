@@ -37,6 +37,7 @@ class SaveReminderFragment : BaseFragment() {
         private const val TAG = "SaveReminderFragment"
         private const val GEOFENCE_RADIUS_IN_METERS = 500f
     }
+
     //Get the view model this time as a single to be shared with the another fragment
     override val _viewModel: SaveReminderViewModel by inject()
     private lateinit var binding: FragmentSaveReminderBinding
@@ -97,6 +98,7 @@ class SaveReminderFragment : BaseFragment() {
             }
         }
     }
+
     @TargetApi(29)
     private fun foregroundAndBackgroundLocationPermissionApproved(): Boolean {
         val foregroundLocationApproved = (
@@ -188,20 +190,19 @@ class SaveReminderFragment : BaseFragment() {
             .addGeofence(geofence)
             .build()
 
-        geofencingClient.removeGeofences(geofencePendingIntent)?.run {
-            addOnCompleteListener {
-                geofencingClient.addGeofences(geofencingRequest, geofencePendingIntent)?.run {
-                    addOnSuccessListener {
-                        Log.e("Add Geofence", geofence.requestId)
-                        _viewModel.saveReminder(_viewModel.newReminderItem)
-                    }
-                    addOnFailureListener {
-                        Toast.makeText(requireActivity(), getString(R.string.geofences_not_added) +"\n"+ it.message.toString(),
-                            Toast.LENGTH_SHORT).show()
-                        if ((it.message != null)) {
-                            Log.w(TAG, it.message!!)
-                        }
-                    }
+        geofencingClient.addGeofences(geofencingRequest, geofencePendingIntent)?.run {
+            addOnSuccessListener {
+                Log.e("Add Geofence", geofence.requestId)
+                _viewModel.saveReminder(_viewModel.newReminderItem)
+            }
+            addOnFailureListener {
+                Toast.makeText(
+                    requireActivity(),
+                    getString(R.string.geofences_not_added) + "\n" + it.message.toString(),
+                    Toast.LENGTH_SHORT
+                ).show()
+                if ((it.message != null)) {
+                    Log.w(TAG, it.message!!)
                 }
             }
         }
