@@ -43,4 +43,6 @@
     <string name="unknown_location">Unknown Location</string>
     <string name="geofences_added">Added!</string>
     <string name="login_or_create_new_account">Login Or Create new account</string>
+    <string name="reminder_details">Reminder Details</string>
+    <string name="reminder_description">Reminder Description</string>
 </resources>

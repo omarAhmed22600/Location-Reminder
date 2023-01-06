@@ -19,11 +19,11 @@
 
         <TextView
             android:id="@+id/textView3"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:gravity="center"
-            android:text="Reminder Details"
+            android:text="@string/reminder_details"
             android:textSize="@dimen/text_size_large"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -45,27 +45,16 @@
             android:id="@+id/title_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
             android:gravity="center"
             android:text="@{reminderDataItem.title}"
             android:textSize="@dimen/text_size_large"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/title_label"
             app:layout_constraintTop_toBottomOf="@+id/textView3"
             tools:text="@string/reminder_title" />
-
-        <TextView
-            android:id="@+id/description_text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@{reminderDataItem.description}"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
-            android:gravity="center"
-            android:textSize="@dimen/text_size_large"
-            app:layout_constraintStart_toEndOf="@+id/description_label"
-            app:layout_constraintTop_toBottomOf="@+id/title_text"
-            tools:text="@string/reminder_desc" />
 
         <TextView
             android:id="@+id/description_label"
@@ -74,10 +63,28 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:gravity="center"
-            android:text="@string/reminder_title"
+            android:text="@string/reminder_description"
             android:textSize="@dimen/text_size_large"
+            app:layout_constraintEnd_toStartOf="@+id/description_text"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/title_label" />
+
+        <TextView
+            android:id="@+id/description_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:gravity="center"
+            android:text="@{reminderDataItem.description}"
+            android:textSize="@dimen/text_size_large"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/description_label"
+            app:layout_constraintTop_toBottomOf="@+id/title_text"
+            tools:text="@string/reminder_desc" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
