@@ -57,7 +57,7 @@ class AuthenticationActivity : AppCompatActivity() {
                     TAG,
                     "Successfully signed in user ${FirebaseAuth.getInstance().currentUser?.displayName}!"
                 )
-                (nav_host_fragment as NavHostFragment).navController.popBackStack()
+                this.finish()
             } else {
                 // Sign in failed. If response is null the user canceled the
                 // sign-in flow using the back button. Otherwise check
