@@ -54,6 +54,8 @@ class RemindersActivityTest :
     @get:Rule
     var activityTestRule: ActivityTestRule<RemindersActivity> =
         ActivityTestRule(RemindersActivity::class.java)
+    private val runningLaterThanQ = android.os.Build.VERSION.SDK_INT >
+            android.os.Build.VERSION_CODES.Q
     /**
      * As we use Koin as a Service Locator Library to develop our code, we'll also use Koin to test our code.
      * at this step we will initialize Koin related code to be able to use it in out testing.
@@ -151,28 +153,31 @@ class RemindersActivityTest :
     }
     @Test
     fun saveReminderScreen_isNotEmptyTitleAndLocation() {
-        //When Saving a new Reminder with title and location (Not empty)
-        val activityScenario = ActivityScenario.launch(RemindersActivity::class.java)
-        dataBindingIdlingResource.monitorActivity(activityScenario)
+        //Only Run the test on devices with api less than or equal 29 Because api's > 29 have an issue testing Toasts
+        //Reference to the issue: https://github.com/android/android-test/issues/803
+        if (!runningLaterThanQ) {
+            //When Saving a new Reminder with title and location (Not empty)
+            val activityScenario = ActivityScenario.launch(RemindersActivity::class.java)
+            dataBindingIdlingResource.monitorActivity(activityScenario)
 
-        onView(withId(R.id.addReminderFAB)).perform(ViewActions.click())
-        onView(withId(R.id.reminderTitle)).perform(ViewActions.typeText("Test Title"))
-        closeSoftKeyboard()
-        onView(withId(R.id.reminderDescription))
-            .perform(ViewActions.typeText("Test Description"))
-        closeSoftKeyboard()
-
-        onView(withId(R.id.selectLocation)).perform(ViewActions.click())
-        //Wait till map loads
-        Thread.sleep(5000)
-        onView(withId(R.id.map)).perform(ViewActions.longClick())
-        onView(withId(R.id.saveButton)).perform(ViewActions.click())
-        onView(withId(R.id.saveReminder)).perform(ViewActions.click())
-        //Then a toast Should Appear saying added.
-        onView(withText(activity.getString(R.string.reminder_saved)))
-            .inRoot(withDecorView(not(activity.window.decorView)))
-            .check(matches(isDisplayed()));
-        activityScenario.close()
+            onView(withId(R.id.addReminderFAB)).perform(ViewActions.click())
+            onView(withId(R.id.reminderTitle)).perform(ViewActions.typeText("Test Title"))
+            closeSoftKeyboard()
+            onView(withId(R.id.reminderDescription))
+                .perform(ViewActions.typeText("Test Description"))
+            closeSoftKeyboard()
+            onView(withId(R.id.selectLocation)).perform(ViewActions.click())
+            //Wait till map loads
+            Thread.sleep(5000)
+            onView(withId(R.id.map)).perform(ViewActions.longClick())
+            onView(withId(R.id.saveButton)).perform(ViewActions.click())
+            onView(withId(R.id.saveReminder)).perform(ViewActions.click())
+            //Then a toast Should Appear saying added.
+            onView(withText(activity.getString(R.string.reminder_saved)))
+                .inRoot(withDecorView(not(activity.window.decorView)))
+                .check(matches(isDisplayed()));
+            activityScenario.close()
+        }
     }
 
 
