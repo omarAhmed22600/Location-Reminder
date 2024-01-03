@@ -119,4 +119,9 @@ Use comments against the userdefined methods to explain the purpose of those met
 
 ##Success Criteria  /	Specifications
 
-![image](https://github.com/omarAhmed22600/Location-Reminder/assets/96152606/1e79aca8-8db6-4f70-895e-adcbd41a9ef0)
+![image](https://github.com/omarAhmed22600/Location-Reminder/assets/96152606/ac51a291-b465-49d6-b660-6e0c6789d3ac)
+![image](https://github.com/omarAhmed22600/Location-Reminder/assets/96152606/92105297-cbb6-4527-9aea-29e0ee8c80cf)
+![image](https://github.com/omarAhmed22600/Location-Reminder/assets/96152606/b16092e6-ab8a-4d44-b82f-caf94088ff28)
+
+
+
