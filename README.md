@@ -105,7 +105,7 @@ The following best practice will make your code clean, logical and readable to t
 As a best practice, use meaningful variable names and method names in your code.
 Use comments against the userdefined methods to explain the purpose of those methods.
 
-## Screenshots
+# Screenshots
 ![screen-shot-2020-06-08-at-5 20 13-pm](https://github.com/omarAhmed22600/Location-Reminder/assets/96152606/2088f057-d217-422a-8f20-aea5294b0961)    ![screen-shot-2020-06-08-at-5 20 13-pm](https://github.com/omarAhmed22600/Location-Reminder/assets/96152606/ed7aa31e-da89-4e7f-afba-34d79ea34474)
 
 
@@ -117,7 +117,7 @@ Use comments against the userdefined methods to explain the purpose of those met
 
 ![screen-shot-2020-06-08-at-5 21 18-pm](https://github.com/omarAhmed22600/Location-Reminder/assets/96152606/b122fbf3-eb75-4a07-b5f9-c3a306c45402)    ![screen-shot-2020-06-08-at-5 21 18-pm](https://github.com/omarAhmed22600/Location-Reminder/assets/96152606/7ade6b93-20dd-4afe-aa91-df67d3d162bd)
 
-##Success Criteria  /	Specifications
+#Success Criteria  /	Specifications
 
 ![image](https://github.com/omarAhmed22600/Location-Reminder/assets/96152606/ac51a291-b465-49d6-b660-6e0c6789d3ac)
 ![image](https://github.com/omarAhmed22600/Location-Reminder/assets/96152606/92105297-cbb6-4527-9aea-29e0ee8c80cf)
